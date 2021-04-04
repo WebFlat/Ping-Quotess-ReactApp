@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import './components/Quotes';
+import './App.scss';
+import Quotes from './components/Quotes';
+import Tablink from './components/Tablink';
+import { BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import Ping from './components/Ping';
+import Loader from './components/Loader';
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Loader />
+      <section className="app">
+        <p className="app__title">
+          Выберите приложение
+          </p>
+        <header className="app__header">
+          <nav className="app__nav">
+            <Tablink name="Котировки" link="Quotes" class="app__link-page" activeclass="active" exact></Tablink>
+            <Tablink name="Пингователь" link="Ping" class="app__link-page"></Tablink>
+          </nav>
+        </header>
+        <section className="app__content">
+          <Route path='/Quotes' component={Quotes} />
+          <Route path='/Ping' component={Ping} />
+        </section>
+      </section>
+    </BrowserRouter>
   );
 }
 
